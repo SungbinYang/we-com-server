@@ -1,0 +1,124 @@
+name: "🚀 Deployment"
+description: "배포 계획 및 체크리스트"
+labels: ["🚀 deploy"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 배포 계획
+        새로운 버전 배포에 대한 정보를 작성해주세요.
+
+  - type: input
+    attributes:
+      label: 📦 배포 버전
+      description: 배포할 버전을 작성해주세요.
+      placeholder: "v1.2.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    attributes:
+      label: 🌐 배포 환경
+      description: 배포할 환경을 선택해주세요.
+      options:
+        - 개발(Development)
+        - 테스트(Staging)
+        - 운영(Production)
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: 📅 예상 배포 일시
+      description: 배포 예정 일시를 작성해주세요.
+      placeholder: "2025-04-20 14:00 KST"
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 📝 배포 내용 요약
+      description: 이번 배포의 주요 내용을 요약해주세요.
+      placeholder: "사용자 프로필 기능 추가 및 검색 성능 개선"
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: ✨ 주요 변경 사항
+      description: 주요 변경 사항을 나열해주세요.
+      value: |
+        ### 추가된 기능
+        - 
+
+        ### 수정된 버그
+        - 
+
+        ### 성능 개선
+        - 
+
+        ### 기타 변경 사항
+        -
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 📊 영향 분석
+      description: 이번 배포가 시스템에 미치는 영향을 분석해주세요.
+      placeholder: "다른 모듈/서비스와의 의존성, 성능에 미치는 영향, 사용자 경험 변화 등"
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 🔄 DB 변경사항
+      description: 데이터베이스 변경 사항이 있다면 작성해주세요.
+      placeholder: "스키마 변경, 마이그레이션 필요 여부, 데이터 업데이트 등"
+    validations:
+      required: false
+
+  - type: textarea
+    attributes:
+      label: ✅ 배포 전 체크리스트
+      description: 배포 전 확인해야 할 항목을 체크해주세요.
+      value: |
+        - [ ] 모든 단위 테스트 통과
+        - [ ] 모든 통합 테스트 통과
+        - [ ] 코드 리뷰 완료
+        - [ ] DB 마이그레이션 스크립트 검증
+        - [ ] 성능 테스트 완료
+        - [ ] 보안 취약점 점검
+        - [ ] 문서화 완료
+        - [ ] 모니터링 설정 확인
+        - [ ] 백업 계획 확인
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 🔄 롤백 계획
+      description: 문제 발생 시 롤백 방법을 설명해주세요.
+      placeholder: "롤백 절차, 필요한 명령어 또는 스크립트, 롤백 판단 기준 등"
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 👥 배포 담당자
+      description: 배포 관련 담당자를 지정해주세요.
+      value: |
+        - 배포 담당: @username
+        - 테스트 담당: @username
+        - 검증 담당: @username
+        - 승인자: @username
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 📋 추가 참고 사항
+      description: 배포에 관련된 기타 참고 사항이 있다면 작성해주세요.
+      placeholder: "특이사항, 관련 문서 링크, 공지 사항 등"
+    validations:
+      required: false
