@@ -1,1 +1,35 @@
-spring.application.name=server
+spring:
+  profiles:
+    active: ${SPRING_PROFILE}
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: ${DB_DRIVER}
+  jpa:
+    hibernate:
+      ddl-auto: ${HIBERNATE_DDL_AUTO}
+    properties:
+      hibernate:
+        format_sql: ${HIBERNATE_FORMAT_SQL}
+        show_sql: ${HIBERNATE_SHOW_SQL}
+        use_sql_comments: ${HIBERNATE_USE_SQL_COMMENT}
+        highlight_sql: ${HIBERNATE_HIGHLIGHT_SQL}
+        session:
+          events:
+            log:
+              LOG_QUERIES_SLOWER_THAN_MS: ${LOG_QUERIES_SLOWER_THAN_MS}
+        generate_statistics: ${GENERATE_STATISTICS}
+    open-in-view: false
+  threads:
+    virtual:
+      enabled: true
+logging:
+  level:
+    org.hibernate:
+      SQL: ${SQL_LOGGING_LEVEL}
+      SQL_SLOW: ${SQL_SLOW}
+      stat: ${STAT}
+      orm:
+        jdbc:
+          bind: ${ORM_LOGGING_LEVEL}
