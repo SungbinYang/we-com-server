@@ -33,3 +33,9 @@ logging:
       orm:
         jdbc:
           bind: ${ORM_LOGGING_LEVEL}
+
+app:
+  security:
+    allowed-origins: ${ALLOWED_ORIGINS}
+    cors:
+      max-age: ${CORS_MAX_AGE}
