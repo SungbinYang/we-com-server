@@ -389,7 +389,9 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(SQLException.class)
     protected ResponseEntity<ErrorResponse> handleSQLException(SQLException e) {
-        if (e.getSQLState() != null && e.getSQLState().equals("23000") || e.getSQLState().equals("40001")) {
+        String sqlState = e.getSQLState();
+
+        if ("23000".equals(sqlState) || "40001".equals(sqlState)) {
             log.error("버전 충돌: ", e);
             return new ResponseEntity<>(
                     ErrorResponse.of(VERSION_CONFLICT, "리소스 버전 충돌이 발생했습니다."),
