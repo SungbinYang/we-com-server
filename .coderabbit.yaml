@@ -1,0 +1,123 @@
+language: ko-KR
+
+early_access: true
+enable_free_tier: true
+reviews:
+  profile: chill
+  request_changes_workflow: true
+  high_level_summary: true
+  high_level_summary_placeholder: "@coderabbitai 요약"
+  auto_title_placeholder: "@coderabbitai"
+  poem: true
+  review_status: true
+  collapse_walkthrough: false
+  path_filters:
+    - "!**/README.md"
+    - "!**/**.json"
+  path_instructions:
+    - path: "**/*.sql"
+      instructions: >
+        As a personal convention, i don't specify FK constraints. Please avoid suggesting adding FK constraints in code reviews.
+        This file is an SQL file, and the SQL statements that modify the table structure are written as strings. 
+        For columns used as primary keys (PK) or foreign keys (FK), you must follow the convention of specifying the column type as "bigint".
+        If a table column name is "id" or ends with "_id", verify that the column type is "bigint". If the SQL is written with a type other than "bigint", 
+        issue a warning. This convention is mandatory, so please raise the severity level of the warning. 
+        Add the following characters to the beginning of the warning message so that users can easily notice it: ⚠️⚠️⚠️
+
+    - path: "**/*Controller*(V[0-9]*)?.java"
+      instructions: >
+        Review the API endpoints based on this guidelines.
+
+        ### Richardson Maturity Model (RMM)
+        1. Level 0: Single URI with POST requests for all actions.
+        2. Level 1: Separate URIs for individual resources.
+        3. Level 2: Use of HTTP methods (GET, POST, PUT, DELETE) to define operations on resources.
+        4. Level 3: Hypermedia (HATEOAS) for advanced RESTful APIs.
+
+        ### API Conventions
+        - URI Rules:
+          - Should be intuitive and self-explanatory.
+          - Should not map 1:1 to database tables.
+          - Must be stateless, with no session state between requests.
+          - Include "api" and version in the URI (/api/{version}/resource).
+          - Use kebab-case for URIs and camelCase for parameters and body contents.
+          - Resource identifiers should be unique and only one per URI path.
+
+        - Design Principles:
+          - APIs should be designed around resources, which are abstractions rather than direct database tables.
+          - Stateless APIs facilitate scalability and flexibility.
+          - Clear separation of frontend and backend via URI structure.
+          - Versioning in URI paths is preferred for clarity and ease of caching.
+          - Maintain consistent naming conventions across the API.
+          - Use plural forms for resource names (/users instead of /user).
+          - Complex actions can include verbs in the URI (/orders/{orderId}/cancel).
+
+        - Implementation Details:
+          - Avoid deeply nested resource paths to ensure maintainability.
+          - Ensure URIs reflect the data they provide, not the permissions or roles required to access them.
+          - Keep URIs simple and predictable, aiding both developers and automated systems.
+  abort_on_close: true
+  auto_review:
+    enabled: true
+    auto_incremental_review: true
+    ignore_title_keywords: []
+    labels: []
+    drafts: false
+    base_branches: []
+  tools:
+    shellcheck:
+      enabled: true
+    ruff:
+      enabled: true
+    markdownlint:
+      enabled: true
+    github-checks:
+      enabled: true
+      timeout_ms: 90000
+    languagetool:
+      enabled: true
+      disabled_rules:
+        - EN_UNPAIRED_BRACKETS
+        - EN_UNPAIRED_QUOTES
+      disabled_categories:
+        - TYPOS
+        - TYPOGRAPHY
+        - CASING
+      enabled_only: false
+      level: default
+      enabled_rules: []
+      enabled_categories: []
+    biome:
+      enabled: true
+    hadolint:
+      enabled: true
+    swiftlint:
+      enabled: true
+    phpstan:
+      enabled: true
+      level: default
+    golangci-lint:
+      enabled: true
+    yamllint:
+      enabled: true
+    gitleaks:
+      enabled: true
+    checkov:
+      enabled: true
+    ast-grep:
+      packages: []
+      rule_dirs: []
+      util_dirs: []
+      essential_rules: true
+  sequence_diagrams: true
+chat:
+  auto_reply: true
+knowledge_base:
+  learnings:
+    scope: auto
+  issues:
+    scope: auto
+  jira:
+    project_keys: []
+  linear:
+    team_keys: []

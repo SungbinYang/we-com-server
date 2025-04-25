@@ -1,0 +1,39 @@
+spring:
+  profiles:
+    active: test
+  datasource:
+    url: "jdbc:h2:mem:wecom;MODE=MYSQL;NON_KEYWORDS=USER"
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+        use_sql_comments: true
+        highlight_sql: true
+        session:
+          events:
+            log:
+              LOG_QUERIES_SLOWER_THAN_MS: 300
+        generate_statistics: true
+    open-in-view: false
+  threads:
+    virtual:
+      enabled: true
+logging:
+  level:
+    org.hibernate:
+      SQL: DEBUG
+      SQL_SLOW: INFO
+      stat: DEBUG
+      orm:
+        jdbc:
+          bind: TRACE
+
+app:
+  security:
+    allowed-origins: "http://localhost:5173"
+    cors:
+      max-age: 600
