@@ -13,6 +13,7 @@ import org.springframework.validation.FieldError;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Getter
@@ -26,7 +27,7 @@ public class ErrorResponse {
     private String code;
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private List<ValidationError> errors;
+    private List<ValidationError> errors = Collections.emptyList();
 
     private LocalDateTime timestamp;
 

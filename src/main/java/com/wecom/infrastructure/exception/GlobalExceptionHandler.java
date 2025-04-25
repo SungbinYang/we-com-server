@@ -92,7 +92,7 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<ErrorResponse> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
         log.error("메소드 인자 타입 불일치: ", e);
         return new ResponseEntity<>(
-                ErrorResponse.of(INVALID_INPUT_FORMAT, e.getMessage()),
+                ErrorResponse.of(INVALID_INPUT_FORMAT, "요청 파라미터 형식이 올바르지 않습니다."),
                 INVALID_INPUT_FORMAT.getHttpStatus()
         );
     }
@@ -389,7 +389,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(SQLException.class)
     protected ResponseEntity<ErrorResponse> handleSQLException(SQLException e) {
-        if (e.getMessage().contains("version") || e.getMessage().contains("optimistic")) {
+        if (e.getSQLState() != null && e.getSQLState().equals("23000") || e.getSQLState().equals("40001")) {
             log.error("버전 충돌: ", e);
             return new ResponseEntity<>(
                     ErrorResponse.of(VERSION_CONFLICT, "리소스 버전 충돌이 발생했습니다."),
@@ -495,7 +495,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(IllegalStateException.class)
     protected ResponseEntity<ErrorResponse> handleIllegalStateException(IllegalStateException e) {
-        if (e.getMessage().contains("rate") || e.getMessage().contains("limit")) {
+        if (e instanceof RateLimitExceededException) {
             log.error("비율 제한 초과: ", e);
             return new ResponseEntity<>(
                     ErrorResponse.of(RATE_LIMIT_EXCEEDED, "요청 비율 제한을 초과했습니다."),

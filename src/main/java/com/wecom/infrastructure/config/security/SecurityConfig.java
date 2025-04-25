@@ -21,6 +21,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.security.SecureRandom;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.springframework.http.HttpHeaders.*;
 import static org.springframework.http.HttpMethod.*;
@@ -67,7 +68,11 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(List.of(allowedOrigins.split(",")));
+        List<String> origins = Stream.of(allowedOrigins.split(","))
+                .map(String::trim)
+                .toList();
+
+        corsConfiguration.setAllowedOrigins(origins);
         corsConfiguration.setAllowedMethods(List.of(GET.name(), POST.name(), PUT.name(), PATCH.name(), DELETE.name(), OPTIONS.name()));
         corsConfiguration.setAllowedHeaders(List.of(AUTHORIZATION, CONTENT_TYPE, COOKIE, CACHE_CONTROL));
         corsConfiguration.setAllowCredentials(true);

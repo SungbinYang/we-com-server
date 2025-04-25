@@ -31,3 +31,9 @@ logging:
       orm:
         jdbc:
           bind: TRACE
+
+app:
+  security:
+    allowed-origins: "http://localhost:5173"
+    cors:
+      max-age: 600
