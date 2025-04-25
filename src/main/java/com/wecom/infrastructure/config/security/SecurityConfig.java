@@ -72,7 +72,7 @@ public class SecurityConfig {
                 .map(String::trim)
                 .toList();
 
-        corsConfiguration.setAllowedOrigins(origins);
+        corsConfiguration.setAllowedOriginPatterns(origins);
         corsConfiguration.setAllowedMethods(List.of(GET.name(), POST.name(), PUT.name(), PATCH.name(), DELETE.name(), OPTIONS.name()));
         corsConfiguration.setAllowedHeaders(List.of(AUTHORIZATION, CONTENT_TYPE, COOKIE, CACHE_CONTROL));
         corsConfiguration.setAllowCredentials(true);
