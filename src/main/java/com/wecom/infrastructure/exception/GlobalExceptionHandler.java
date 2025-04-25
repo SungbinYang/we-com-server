@@ -79,7 +79,7 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<ErrorResponse> handleConstraintViolationException(ConstraintViolationException e) {
         log.error("제약 조건 위반: ", e);
         return new ResponseEntity<>(
-                ErrorResponse.of(VALIDATION_FAILED, e.getMessage()),
+                ErrorResponse.of(VALIDATION_FAILED, "요청 데이터가 유효성 규칙을 위반했습니다."),
                 VALIDATION_FAILED.getHttpStatus()
         );
     }
