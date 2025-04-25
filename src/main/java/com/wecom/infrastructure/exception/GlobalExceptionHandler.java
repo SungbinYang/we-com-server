@@ -53,7 +53,7 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         log.error("유효하지 않은 요청 파라미터: ", e);
         return new ResponseEntity<>(
-                ErrorResponse.of(INVALID_REQUEST_PARAMETER, e.getBindingResult()),
+                ErrorResponse.of(INVALID_REQUEST_PARAMETER, "요청 파라미터가 유효하지 않습니다."),
                 INVALID_REQUEST_PARAMETER.getHttpStatus()
         );
     }
@@ -66,7 +66,7 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<ErrorResponse> handleBindException(BindException e) {
         log.error("바인딩 실패: ", e);
         return new ResponseEntity<>(
-                ErrorResponse.of(INVALID_REQUEST_PARAMETER, e.getBindingResult()),
+                ErrorResponse.of(INVALID_REQUEST_PARAMETER, "바인딩에 실패하였습니다."),
                 INVALID_REQUEST_PARAMETER.getHttpStatus()
         );
     }
@@ -118,7 +118,7 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<ErrorResponse> handleBusinessException(BusinessException e) {
         log.error("비즈니스 규칙 위반: ", e);
         return new ResponseEntity<>(
-                ErrorResponse.of(BUSINESS_RULE_VIOLATION, e.getMessage()),
+                ErrorResponse.of(BUSINESS_RULE_VIOLATION, "비즈니스 규칙 위반이 발생했습니다."),
                 BUSINESS_RULE_VIOLATION.getHttpStatus()
         );
     }
@@ -300,7 +300,7 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<ErrorResponse> handleNoSuchElementException(NoSuchElementException e) {
         log.error("요소를 찾을 수 없음: ", e);
         return new ResponseEntity<>(
-                ErrorResponse.of(NOT_FOUND_RESOURCE, e.getMessage()),
+                ErrorResponse.of(NOT_FOUND_RESOURCE, "요청한 리소스를 찾을 수 없습니다."),
                 NOT_FOUND_RESOURCE.getHttpStatus()
         );
     }
@@ -313,7 +313,7 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<ErrorResponse> handleEntityNotFoundException(EntityNotFoundException e) {
         log.error("엔티티를 찾을 수 없음: ", e);
         return new ResponseEntity<>(
-                ErrorResponse.of(NOT_FOUND_RESOURCE, e.getMessage()),
+                ErrorResponse.of(NOT_FOUND_RESOURCE, "요청한 엔티티를 찾을 수 없습니다."),
                 NOT_FOUND_RESOURCE.getHttpStatus()
         );
     }
@@ -326,7 +326,7 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<ErrorResponse> handlePropertyReferenceException(PropertyReferenceException e) {
         log.error("JPA 속성 참조 오류: ", e);
         return new ResponseEntity<>(
-                ErrorResponse.of(NOT_FOUND_RESOURCE, "잘못된 속성 참조: " + e.getMessage()),
+                ErrorResponse.of(NOT_FOUND_RESOURCE, "잘못된 속성 참조가 발생했습니다."),
                 NOT_FOUND_RESOURCE.getHttpStatus()
         );
     }
@@ -339,7 +339,7 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<ErrorResponse> handleNoHandlerFoundException(NoHandlerFoundException e) {
         log.error("엔드포인트를 찾을 수 없음: ", e);
         return new ResponseEntity<>(
-                ErrorResponse.of(ENDPOINT_NOT_FOUND, "요청한 경로 " + e.getRequestURL() + "을(를) 찾을 수 없습니다."),
+                ErrorResponse.of(ENDPOINT_NOT_FOUND, "요청을 처리할 수 없습니다."),
                 ENDPOINT_NOT_FOUND.getHttpStatus()
         );
     }
@@ -352,7 +352,7 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<ErrorResponse> handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
         log.error("지원하지 않는 HTTP 메소드: ", e);
         return new ResponseEntity<>(
-                ErrorResponse.of(INVALID_REQUEST_METHOD, e.getMessage()),
+                ErrorResponse.of(INVALID_REQUEST_METHOD, "지원하지 않는 HTTP 메소드입니다."),
                 INVALID_REQUEST_METHOD.getHttpStatus()
         );
     }

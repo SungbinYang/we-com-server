@@ -27,29 +27,26 @@ public class ErrorResponse {
     private String code;
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private List<ValidationError> errors = Collections.emptyList();
+    private List<ValidationError> errors;
 
-    private LocalDateTime timestamp;
+    private final LocalDateTime timestamp = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
 
     private ErrorResponse(final ExceptionCode exceptionCode) {
         this.message = exceptionCode.getMessage();
         this.status = exceptionCode.getHttpStatus();
         this.code = exceptionCode.getCode();
-        this.timestamp = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
     }
 
     private ErrorResponse(final ExceptionCode exceptionCode, final String message) {
         this.message = message;
         this.status = exceptionCode.getHttpStatus();
         this.code = exceptionCode.getCode();
-        this.timestamp = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
     }
 
     private ErrorResponse(final ExceptionCode exceptionCode, final List<ValidationError> errors) {
         this.message = exceptionCode.getMessage();
         this.status = exceptionCode.getHttpStatus();
         this.code = exceptionCode.getCode();
-        this.timestamp = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
         this.errors = errors;
     }
 
