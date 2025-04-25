@@ -15,6 +15,8 @@ spring:
         show_sql: ${HIBERNATE_SHOW_SQL}
         use_sql_comments: ${HIBERNATE_USE_SQL_COMMENT}
         highlight_sql: ${HIBERNATE_HIGHLIGHT_SQL}
+        timezone:
+          default_storage: NORMALIZE
         session:
           events:
             log:
