@@ -144,7 +144,7 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<ErrorResponse> handleMissingServletRequestParameterException(MissingServletRequestParameterException e) {
         log.error("필수 요청 파라미터 누락: ", e);
         return new ResponseEntity<>(
-                ErrorResponse.of(MISSING_REQUIRED_FIELD, "필수 파라미터 '" + e.getParameterName() + "'가 누락되었습니다."),
+                ErrorResponse.of(MISSING_REQUIRED_FIELD, "필수 파라미터가 누락되었습니다."),
                 MISSING_REQUIRED_FIELD.getHttpStatus()
         );
     }
@@ -157,7 +157,7 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<ErrorResponse> handleHttpMediaTypeNotSupportedException(HttpMediaTypeNotSupportedException e) {
         log.error("지원하지 않는 미디어 타입: ", e);
         return new ResponseEntity<>(
-                ErrorResponse.of(UNSUPPORTED_MEDIA_TYPE, "지원하지 않는 미디어 타입입니다: " + e.getContentType()),
+                ErrorResponse.of(UNSUPPORTED_MEDIA_TYPE, "지원하지 않는 미디어 타입입니다."),
                 UNSUPPORTED_MEDIA_TYPE.getHttpStatus()
         );
     }
@@ -409,7 +409,7 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<ErrorResponse> handleUnsupportedOperationException(UnsupportedOperationException e) {
         log.error("지원하지 않는 연산: ", e);
         return new ResponseEntity<>(
-                ErrorResponse.of(UNPROCESSABLE_REQUEST, "요청을 처리할 수 없습니다: " + e.getMessage()),
+                ErrorResponse.of(UNPROCESSABLE_REQUEST, "요청을 처리할 수 없습니다."),
                 UNPROCESSABLE_REQUEST.getHttpStatus()
         );
     }
